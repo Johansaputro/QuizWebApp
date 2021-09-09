@@ -34,9 +34,14 @@ app.get('/', (req,res) => {
 
 app.post('/form1', (req,res) => {
   name1 = req.body.name1;
+  counter = 0;
   db.query("INSERT INTO Mobil(IdMobil) VALUES (?)",[name1] , function(err, rs) {
     if (err) throw err;
     console.log("1 record inserted");
+  });
+  db.query("UPDATE Mobil SET Sequence = ? WHERE IdMobil = ?",[0, name1], function(err,rs) {
+    if (err) throw err;
+    console.log("Sequence updated")
   });
 });
 
