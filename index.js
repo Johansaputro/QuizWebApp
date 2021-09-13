@@ -43,6 +43,7 @@ app.post('/form1', (req,res) => {
     if (err) throw err;
     console.log("Sequence updated")
   });
+  res.redirect('/');
 });
 
 app.post('/formnext', (req,res) => {
