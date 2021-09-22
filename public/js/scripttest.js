@@ -92,7 +92,7 @@ next_btn.onclick = ()=>{
 // get team name as variable
 function othername() {
     var namatim = document.getElementById("team_name").value;
-    alert(namatim);
+    // alert(namatim);
 }
 
 // getting questions and options from array

@@ -2,11 +2,13 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
+var booleanFlag = false;
 var router = express.Router();
 var name1 = "";
 var datatostring = "";
 var counterr = 0;
 var mysql = require("mysql");
+// var timeout = require('connect-timeout');
 var db = mysql.createPool({
   host: "103.146.203.58",
   user: "teamiee",
@@ -14,6 +16,10 @@ var db = mysql.createPool({
   port: "3306",
   database: "cit2019"
 })
+
+// function haltOnTimedout (req, res, next) {
+//   if (!req.timedout) next()
+// }
 
 
 // app
@@ -39,13 +45,18 @@ app.post('/form1', (req,res) => {
   counterr = 0;
   db.query("INSERT INTO Mobil(IdMobil) VALUES (?)",[name1] , function(err, rs) {
     if (err) throw err;
-    console.log("1 record inserted");
+    // console.log("1 record inserted");
   });
   db.query("UPDATE Mobil SET Sequence = ? WHERE IdMobil = ?",[0, name1], function(err,rs) {
     if (err) throw err;
-    console.log("Sequence updated")
+    // console.log("Sequence updated")
   });
   // res.redirect('/');
+  function triggerThisOnSomeEvent(booleanFlag) {
+    if (booleanFlag) {
+        res.send(name1);
+    }
+}
 });
 
 app.post('/formnext', (req,res) => {
@@ -61,14 +72,23 @@ app.post('/formnext', (req,res) => {
     };
 
     datatostring = JSON.stringify(datatoSend);
-    console.log("Movement updated");
+    // console.log("Movement updated");
   });
   db.query("UPDATE Mobil SET Sequence = ? WHERE IdMobil = ?",[counterr, name1], function(err,rs) {
     if (err) throw err;
-    console.log("Sequence updated")
+    // console.log("Sequence updated")
   });
+  function triggerThisOnSomeEvent(booleanFlag) {
+    if (booleanFlag) {
+        res.send(datatostring);
+    }
+}
   // res.redirect('/');
 });
+
+app.get('/form1', (req,res) => {
+  res.send(name1);
+})
 
 app.get('/formnext', (req, res) => {
   res.send(datatostring);
