@@ -51,12 +51,8 @@ app.post('/form1', (req,res) => {
     if (err) throw err;
     // console.log("Sequence updated")
   });
+  res.status(204).send();
   // res.redirect('/');
-  function triggerThisOnSomeEvent(booleanFlag) {
-    if (booleanFlag) {
-        res.send(name1);
-    }
-}
 });
 
 app.post('/formnext', (req,res) => {
@@ -78,12 +74,8 @@ app.post('/formnext', (req,res) => {
     if (err) throw err;
     // console.log("Sequence updated")
   });
-  function triggerThisOnSomeEvent(booleanFlag) {
-    if (booleanFlag) {
-        res.send(datatostring);
-    }
-}
   // res.redirect('/');
+  res.status(204).send();
 });
 
 app.get('/form1', (req,res) => {
