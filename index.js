@@ -81,7 +81,7 @@ app.post('/formnext', (req,res) => {
 });
 
 app.get('/form1', (req,res) => {
-  res.send(name1);
+  res.send(JSON.stringify(name1));
 })
 
 app.get('/formnext', (req, res) => {
