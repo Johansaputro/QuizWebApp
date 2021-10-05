@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
-var booleanFlag = false;
+var testVar = "";
 var router = express.Router();
 var name1 = "";
 var datatostring = "";
@@ -58,16 +58,18 @@ app.post('/form1', (req,res) => {
 app.post('/formnext', (req,res) => {
   var correctorwrong = req.body.status;
   counterr = counterr + 1;
+  console.log(counterr);
+  console.log(correctorwrong);
 
   db.query("UPDATE Mobil SET Movement = ? WHERE IdMobil = ?",[correctorwrong, name1] , function(err, rs) {
     if (err) throw err;
-    var datatoSend = {
-      IdMobil: name1,
-      Movement: correctorwrong,
-      Counterr: counterr
-    };
-
-    datatostring = JSON.stringify(datatoSend);
+    // var datatoSend = {
+    //   IdMobil: name1,
+    //   Movement: correctorwrong,
+    //   Counterr: counterr
+    // };
+    //
+    // datatostring = JSON.stringify(datatoSend);
     // console.log("Movement updated");
   });
   db.query("UPDATE Mobil SET Sequence = ? WHERE IdMobil = ?",[counterr, name1], function(err,rs) {
@@ -83,7 +85,11 @@ app.get('/form1', (req,res) => {
 })
 
 app.get('/formnext', (req, res) => {
-  res.send(datatostring);
+  db.query("SELECT * FROM Mobil", function(err,rs) {
+    if (err) throw err;
+    testVar = JSON.stringify(rs);
+  })
+  res.send(testVar);
 });
 
 app.get('/test', (req,res) => {
