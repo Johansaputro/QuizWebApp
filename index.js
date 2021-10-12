@@ -63,13 +63,13 @@ app.post('/formnext', (req,res) => {
 
   db.query("UPDATE Mobil SET Movement = ? WHERE IdMobil = ?",[correctorwrong, name1] , function(err, rs) {
     if (err) throw err;
-    // var datatoSend = {
-    //   IdMobil: name1,
-    //   Movement: correctorwrong,
-    //   Counterr: counterr
-    // };
-    //
-    // datatostring = JSON.stringify(datatoSend);
+    var datatoSend = {
+      IdMobil: name1,
+      Movement: correctorwrong,
+      Counterr: counterr
+    };
+
+    datatostring = JSON.stringify(datatoSend);
     // console.log("Movement updated");
   });
   db.query("UPDATE Mobil SET Sequence = ? WHERE IdMobil = ?",[counterr, name1], function(err,rs) {
@@ -81,15 +81,18 @@ app.post('/formnext', (req,res) => {
 });
 
 app.get('/form1', (req,res) => {
-  res.send(JSON.stringify(name1));
+  var data = {
+    IdMobil: name1
+  }
+  res.send(JSON.stringify(data));
 })
 
 app.get('/formnext', (req, res) => {
-  db.query("SELECT * FROM Mobil", function(err,rs) {
-    if (err) throw err;
-    testVar = JSON.stringify(rs);
-  })
-  res.send(testVar);
+  // db.query("SELECT * FROM Mobil Where IdMobil = ?", [name1], function(err,rs) {
+  //   if (err) throw err;
+  //   testVar = JSON.stringify(rs);
+  // })
+  res.send(datatostring);
 });
 
 app.get('/test', (req,res) => {
