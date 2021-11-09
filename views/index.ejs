@@ -84,12 +84,18 @@
     </div>
     <!-- form_box -->
     <div class="form_box">
-      <div class="info-title"><span>Masukan Nama tim kalian</span></div>
+      <div class="info-title"><span>Pilih Mobil kalian</span></div>
       <p>
          (Click Continue untuk melanjutkan)
       </p>
+
       <form action="/form1" method="post" class="name-form">
-        <input class="entry" name="name1" type="text" id="team_name" value="">
+        <input type="hidden" name="name1" id="hiddenInput1">
+        Select your roboarm:
+        <select id="mySelect">
+          <option value="Mobil1">Mobil 1</option>
+          <option value="Mobil2">Mobil 2</option>
+        </select>
         <!-- <input type="submit" onclick="getID();" value=""> -->
         <div class="buttons">
           <button class="quit2" href="index.html">Exit Quiz</button>

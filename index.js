@@ -42,10 +42,10 @@ app.get('/', (req,res) => {
 app.post('/form1', (req,res) => {
   name1 = req.body.name1;
   counterr = 0;
-  db.query("INSERT INTO Mobil(IdMobil) VALUES (?)",[name1] , function(err, rs) {
-    if (err) throw err;
-    // console.log("1 record inserted");
-  });
+  // db.query("INSERT INTO Mobil(IdMobil) VALUES (?)",[name1] , function(err, rs) {
+  //   if (err) throw err;
+  //   // console.log("1 record inserted");
+  // });
   db.query("UPDATE Mobil SET Sequence = ? WHERE IdMobil = ?",[0, name1], function(err,rs) {
     if (err) throw err;
     // console.log("Sequence updated")
@@ -75,11 +75,11 @@ app.post('/formnext', (req,res) => {
     if (err) throw err;
     // console.log("Sequence updated")
   });
-  db.query("SELECT * FROM Mobil", function(err,rs) {
-    if (err) throw err;
-    console.log(rs)
-    datatostring = JSON.stringify(rs);
-  })
+  // db.query("SELECT * FROM Mobil WHERE IdMobil = ?",[name1] , function(err,rs) {
+  //   if (err) throw err;
+  //   console.log(rs)
+  //   datatostring = JSON.stringify(rs);
+  // })
   // res.redirect('/');
   res.status(204).send();
 });
@@ -92,10 +92,11 @@ app.get('/form1', (req,res) => {
 })
 
 app.get('/formnext', (req, res) => {
-  // db.query("SELECT * FROM Mobil Where IdMobil = ?", [name1], function(err,rs) {
-  //   if (err) throw err;
-  //   testVar = JSON.stringify(rs);
-  // })
+  db.query("SELECT * FROM Mobil Where IdMobil = ?", [name1], function(err,rs) {
+    if (err) throw err;
+    console.log(rs);
+    datatostring = JSON.stringify(rs);
+  })
   res.send(datatostring);
 });
 

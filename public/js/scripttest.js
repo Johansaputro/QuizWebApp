@@ -91,7 +91,9 @@ next_btn.onclick = ()=>{
 }
 // get team name as variable
 function othername() {
-    var namatim = document.getElementById("team_name").value;
+  var input = document.getElementById('hiddenInput1');
+  var selectedValue = mySelect.value;
+  input.value = selectedValue;
     // alert(namatim);
 }
 
