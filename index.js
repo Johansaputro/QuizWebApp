@@ -77,7 +77,8 @@ app.post('/formnext', (req,res) => {
   });
   db.query("SELECT * FROM Mobil", function(err,rs) {
     if (err) throw err;
-    datatostring = JSON.stringify(rs[0]);
+    console.log(rs)
+    datatostring = JSON.stringify(rs);
   })
   // res.redirect('/');
   res.status(204).send();
