@@ -30,7 +30,6 @@ app.use(express.static('public'))
 app.use('/CSS', express.static(__dirname + 'public/CSS'))
 app.use('/img', express.static(__dirname + 'public/img'))
 app.use('/js', express.static(__dirname + 'public/js'))
-app.use('/php', express.static(__dirname + 'public/php'))
 
 //set engines
 app.set('views', './views')
@@ -63,19 +62,23 @@ app.post('/formnext', (req,res) => {
 
   db.query("UPDATE Mobil SET Movement = ? WHERE IdMobil = ?",[correctorwrong, name1] , function(err, rs) {
     if (err) throw err;
-    var datatoSend = {
-      IdMobil: name1,
-      Movement: correctorwrong,
-      Counterr: counterr
-    };
+    // var datatoSend = {
+    //   IdMobil: name1,
+    //   Movement: correctorwrong,
+    //   Counterr: counterr
+    // };
 
-    datatostring = JSON.stringify(datatoSend);
+    // datatostring = JSON.stringify(datatoSend);
     // console.log("Movement updated");
   });
   db.query("UPDATE Mobil SET Sequence = ? WHERE IdMobil = ?",[counterr, name1], function(err,rs) {
     if (err) throw err;
     // console.log("Sequence updated")
   });
+  db.query("SELECT * FROM Mobil", function(err,rs) {
+    if (err) throw err;
+    datatostring = JSON.stringify(rs[0]);
+  })
   // res.redirect('/');
   res.status(204).send();
 });
