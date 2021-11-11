@@ -10,11 +10,11 @@ var counterr = 0;
 var mysql = require("mysql");
 // var timeout = require('connect-timeout');
 var db = mysql.createPool({
-  host: "103.146.203.58",
-  user: "teamiee",
-  password: "cit2019teamiee",
-  port: "3306",
-  database: "cit2019"
+  host: "",
+  user: "",
+  password: "",
+  port: "",
+  database: ""
 })
 
 // function haltOnTimedout (req, res, next) {
